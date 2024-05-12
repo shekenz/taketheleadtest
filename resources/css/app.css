@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarina&display=swap');
+
+:root {
+    background: linear-gradient(#008, black);
+    height: 100vh;
+    color: yellow;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+section#main {
+    flex-grow: 1;
+}
+
+footer {
+    margin-top: auto;
+    padding: 1rem;
+    text-align: right;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+}
+
+h1 {
+    font-family: Sarina;
+    color: #dd0000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 30' width='100%25'%3E%3Cpolygon stroke='%23009955' stroke-linejoin='milter' stroke-miterlimit='10' stroke-width='2' fill='yellow' points='2,1 87,6 83,18 9,20'%3E%3C/polygon%3E%3C/svg%3E");
+    background-size: 100% auto;
+    font-size: 3rem;
+    transform: rotate(-8deg);
+    display: block;
+    width: fit-content;
+    padding: 1rem 3rem 2rem 0;
+    text-shadow: 2px 5px 0 #591515;
+    margin: 1rem 0rem 0rem 1rem;
+}
+
+button {
+    background: yellow;
+    border-radius: 5px;
+    padding: 1rem;
+    border: none;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #008;
+    cursor: pointer;
+}
+
+div#import-progress-wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+div.progress-bar-wrapper {
+    padding: 0.25rem;
+    border: 1px solid yellow;
+    border-radius: 5px;
+    display: flex;
+    width: fit-content;
+    margin: 1rem;
+}
+
+div.progress-bar {
+    width: 1rem;
+    height: 2rem;
+    margin: 0.25rem;
+    background-color: transparent;
+    transition: background-color 300ms;
+}
+
+div.progress-bar-done {
+    background-color: yellow;
+}
