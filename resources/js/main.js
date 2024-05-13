@@ -2,6 +2,7 @@ let importProgress = document.getElementById('import-progress');
 let importWindow = document.getElementById('import-window');
 let comicCollection = document.getElementById('comic-collection');
 let importProgressPercentage = document.getElementById('import-progress-percentage');
+let importButton = document.getElementById('import-button');
 
 window.addEventListener('load', () => {
     // show(importWindow);
@@ -12,9 +13,17 @@ window.addEventListener('load', () => {
                 show(importWindow);
                 observeProgress();
             } else {
+                loadCollection();
                 show(comicCollection);
             }
         });
+});
+
+importButton.addEventListener('click', () => {
+    hide(comicCollection);
+    show(importWindow);
+    setProgressBar(importProgress, 0);
+    fetch(window.location.origin + '/api/import-marvel-data').then(() => { observeProgress(); });
 });
 
 function observeProgress() {
@@ -48,6 +57,12 @@ function setProgressBar(wrapper, progress) {
     }
 
     importProgressPercentage.innerHTML = progress + '%';
+}
+
+function loadCollection() {
+    fetch(window.location.origin + '/api/comics?page=1')
+    .then((r) => r.json())
+    .then((j) => console.log(j));
 }
 
 function show(element) {

@@ -2,11 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Jobs\ProcessComicChunk;
+use App\Models\Comic;
 use Illuminate\Support\Facades\Log;
 use App\Services\ComicAPIService;
 use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Redis;
+use App\Http\Resources\ComicCollection;
+use App\Http\Resources\ComicResource;
 
 Route::get('import-marvel-data', function () {
 
@@ -42,4 +45,10 @@ Route::get('import-status', function () {
         'importPending' => (bool) Redis::get('comicsImportPending'),
         'progress' => (int) Redis::get('comicsImportProgress'),
     ]);
+});
+
+// Route::apiResources('comics', Comic::class);
+
+Route::get('comics', function() {
+    return ComicResource::collection(Comic::paginate(10));
 });

@@ -41,7 +41,7 @@
             </div>
             <div id="comic-collection" style="display: none" class="centered-content">
                 <span>No comics found in collection.</span>
-                <button>Import from Marvel</button>
+                <button id="import-button">Import from Marvel</button>
             </div>
         </section>
         <footer>
