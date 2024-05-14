@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Redis;
 use App\Http\Resources\ComicCollection;
 use App\Http\Resources\ComicResource;
+use App\Http\Controllers\ComicController;
 
 Route::get('import-marvel-data', function () {
 
@@ -47,8 +48,4 @@ Route::get('import-status', function () {
     ]);
 });
 
-// Route::apiResources('comics', Comic::class);
-
-Route::get('comics', function() {
-    return ComicResource::collection(Comic::paginate(10));
-});
+Route::get('comics', [ComicController::class, 'index']);

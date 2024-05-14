@@ -18,6 +18,7 @@ class ComicResource extends JsonResource
         return [
             'id' => $this->id,
             'marvel_id' => $this->marvel_id,
+            'title' => $this->title,
             'thumbnail' => $this->thumbnail,
         ];
     }

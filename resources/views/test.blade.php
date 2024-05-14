@@ -39,9 +39,13 @@
                     <span id="import-progress-percentage">0%</span>
                 </div>
             </div>
-            <div id="comic-collection" style="display: none" class="centered-content">
-                <span>No comics found in collection.</span>
-                <button id="import-button">Import from Marvel</button>
+            <div id="comic-collection" style="display: none">
+                <div id="empty-collection" class="centered-content" style="display: none">
+                    <span>No comics found in collection.</span>
+                    <button id="import-button">Import from Marvel</button>
+                </div>
+                    <div id="comic-collection-wrapper">
+                    </div>
             </div>
         </section>
         <footer>

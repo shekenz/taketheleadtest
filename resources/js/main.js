@@ -1,8 +1,10 @@
-let importProgress = document.getElementById('import-progress');
-let importWindow = document.getElementById('import-window');
-let comicCollection = document.getElementById('comic-collection');
-let importProgressPercentage = document.getElementById('import-progress-percentage');
-let importButton = document.getElementById('import-button');
+const importProgress = document.getElementById('import-progress');
+const importWindow = document.getElementById('import-window');
+const comicCollection = document.getElementById('comic-collection');
+const importProgressPercentage = document.getElementById('import-progress-percentage');
+const importButton = document.getElementById('import-button');
+const emptyCollection = document.getElementById('empty-collection');
+const comicCollectionWrapper = document.getElementById('comic-collection-wrapper');
 
 window.addEventListener('load', () => {
     // show(importWindow);
@@ -27,7 +29,7 @@ importButton.addEventListener('click', () => {
 });
 
 function observeProgress() {
-    let intervalId = window.setInterval(() => {
+    const intervalId = window.setInterval(() => {
         fetch(window.location.origin + '/api/import-status')
         .then((r) => r.json())
         .then((j) => {
@@ -62,7 +64,24 @@ function setProgressBar(wrapper, progress) {
 function loadCollection() {
     fetch(window.location.origin + '/api/comics?page=1')
     .then((r) => r.json())
-    .then((j) => console.log(j));
+        .then((j) => {
+            if (j.data.length > 0) {
+                for (let comic of j.data) {
+                    console.log(comic);
+                    const comicElement = document.createElement('div');
+                    comicElement.classList.add('comic-wrapper');
+                    const comicThumbnail = document.createElement('img');
+                    comicThumbnail.src = comic.thumbnail + '.jpg';
+                    const comicTitle = document.createElement('h5');
+                    comicTitle.append(comic.title);
+                    comicElement.append(comicThumbnail);
+                    comicElement.append(comicTitle);
+                    comicCollectionWrapper.append(comicElement);
+                }
+            } else {
+                show(emptyCollection);
+            }
+        });
 }
 
 function show(element) {
