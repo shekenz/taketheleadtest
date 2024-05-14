@@ -5,6 +5,7 @@ const importProgressPercentage = document.getElementById('import-progress-percen
 const importButton = document.getElementById('import-button');
 const emptyCollection = document.getElementById('empty-collection');
 const comicCollectionWrapper = document.getElementById('comic-collection-wrapper');
+let collectionLoaded = false;
 
 window.addEventListener('load', () => {
     // show(importWindow);
@@ -39,7 +40,10 @@ function observeProgress() {
                 setProgressBar(importProgress, 100);
                 setTimeout(() => {
                     hide(importWindow);
+                    hide(emptyCollection);
                     show(comicCollection);
+                    loadCollection();
+                    collectionLoaded = true;
                 }, 1000);
             }
             setProgressBar(importProgress, j.progress);
@@ -62,8 +66,9 @@ function setProgressBar(wrapper, progress) {
 }
 
 function loadCollection() {
-    fetch(window.location.origin + '/api/comics?page=1')
-    .then((r) => r.json())
+    if (!collectionLoaded) {
+        fetch(window.location.origin + '/api/comics?page=1')
+        .then((r) => r.json())
         .then((j) => {
             if (j.data.length > 0) {
                 for (let comic of j.data) {
@@ -82,6 +87,7 @@ function loadCollection() {
                 show(emptyCollection);
             }
         });
+    }
 }
 
 function show(element) {
